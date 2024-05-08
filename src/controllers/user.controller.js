@@ -141,16 +141,21 @@ const loginUser = asyncHandler(async (req, res) =>{
    const {accessToken, refreshToken} = await generateAccessAndRefereshTokens(user._id)
 
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+    const currentDate = new Date();
 
+    // Calculate the expiration time (current time + 1 day)
+    const expirationDate = new Date(currentDate.getTime() + (1 * 24 * 60 * 60 * 1000)); // 1 day in milliseconds
     const options = {
         httpOnly: true,
         secure: true,
-        sameSite: 'None',
+        SameSite: 'None',
+        expires: expirationDate
+       
     }
 
     return res
     .status(200)
-    .cookie("accessToken", accessToken, options)
+    .cookie("accessToken", accessToken, options,)
     .cookie('refreshtoken', refreshToken, options)
     .json(
         new ApiResponse(
