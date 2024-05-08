@@ -5,7 +5,9 @@ const app = express()
 
 
 app.use(cors({
-    origin: '*',
+    origin: ['https://playtube-app-frontend.vercel.app',
+    'https://playtube-app-frontend-git-main-manojkumar1608s-projects.vercel.app'
+    ],
     methods: ['GET', 'POST', 'DELETE', 'PATCH'],
     credentials: true
 }));
