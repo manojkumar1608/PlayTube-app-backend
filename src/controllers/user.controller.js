@@ -144,17 +144,14 @@ const loginUser = asyncHandler(async (req, res) =>{
 
     const options = {
         httpOnly: true,
-        secure: true
+        secure: true,
+        sameSite: none
     }
 
     return res
     .status(200)
     .cookie("accessToken", accessToken, options)
-    .cookie('refreshtoken', refreshToken, {
-        httpOnly: true,
-        path: '/',
-        maxAge: 30*24*60*60*1000 // 30days
-    })
+    .cookie('refreshtoken', refreshToken, options)
     .json(
         new ApiResponse(
             200, 
