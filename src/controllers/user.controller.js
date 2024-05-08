@@ -149,8 +149,6 @@ const loginUser = asyncHandler(async (req, res) =>{
         httpOnly: true,
         secure: true,
         SameSite: 'None',
-        expires: expirationDate
-       
     }
 
     return res
